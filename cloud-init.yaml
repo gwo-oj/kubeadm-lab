@@ -1,0 +1,12 @@
+#cloud-config
+# 모든 노드 공통. k8s 관련 설정은 일부러 넣지 않는다 (실습 범위).
+package_update: true
+packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gpg
+  - vim
+  - bash-completion
+  - jq
+timezone: Asia/Seoul
