@@ -84,6 +84,8 @@ sudo kubectl --kubeconfig /etc/kubernetes/admin.conf get nodes
 sudo systemctl start kubelet
 ```
 
+cp1이 바로 `NotReady`로 바뀌지 않아도 정상입니다. node-monitor-grace-period(기본 40초)가 지나야 바뀝니다.
+
 `multipass stop cp1`으로 VM 자체를 내리는 방법은 쓰지 마세요. 다시 켤 때 IP가 바뀌면 클러스터가 깨집니다(아래 '주의' 참고).
 
 CP를 2대 내리면 etcd quorum(3대 중 2대)이 깨져서 API가 멈춥니다. 이것도 한 번 확인해 볼 만합니다.

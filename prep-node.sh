@@ -6,6 +6,7 @@ set -euo pipefail
 
 K8S_VERSION="${K8S_VERSION:-v1.36}"
 [ "$(id -u)" -eq 0 ] || { echo "root로 실행하세요 (sudo)" >&2; exit 1; }
+export DEBIAN_FRONTEND=noninteractive
 
 # 1. swap off
 swapoff -a
@@ -44,8 +45,8 @@ curl -fsSL "https://pkgs.k8s.io/core:/stable:/${K8S_VERSION}/deb/Release.key" \
 echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/${K8S_VERSION}/deb/ /" \
   > /etc/apt/sources.list.d/kubernetes.list
 apt-get update -q
-apt-get install -y -q kubelet kubeadm kubectl
-apt-mark hold kubelet kubeadm kubectl >/dev/null
+apt-get install -y -q kubelet kubeadm kubectl cri-tools
+apt-mark hold kubelet kubeadm kubectl cri-tools >/dev/null
 systemctl enable kubelet >/dev/null
 
 # 5. crictl이 containerd를 바라보게

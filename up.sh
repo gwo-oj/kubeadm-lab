@@ -149,7 +149,7 @@ if [ "$HA" = true ]; then
 "
   done
   multipass exec lb -- sudo bash -c "
-    apt-get install -y -q haproxy >/dev/null
+    DEBIAN_FRONTEND=noninteractive apt-get install -y -q haproxy >/dev/null
     cat > /etc/haproxy/haproxy.cfg <<'EOF'
 global
     log /dev/log local0
